@@ -1,16 +1,16 @@
 function RenderSuggestions(props){
     return(
         <div className={"sugestao"} key={props.index}>
-              <div className={"usuario"}>
-                <img src={props.dataSuggestions.image} alt={props.dataSuggestions.image} />
-                <div className="texto">
-                  <div className="nome">{props.dataSuggestions.userName}</div>
-                  <div className="razao">Segue você</div>
-                </div>
+            <div className={"usuario"}>
+              <img src={props.dataSuggestions.image} alt={props.dataSuggestions.image} />
+              <div className="texto">
+                <div className="nome">{props.dataSuggestions.userName}</div>
+                <div className="razao">Segue você</div>
               </div>
-
-              <div className="seguir">Seguir</div>
             </div>
+
+            <div className="seguir">Seguir</div>
+        </div>
     );
 }
 
@@ -55,7 +55,7 @@ export default function SideBar(){
               <div>Ver tudo</div>
             </div>
             
-            {suggestions.map((suggestion, index)=> <RenderSuggestions dataSuggestions={suggestion} index={index}/>)}
+            {suggestions.map((suggestion, index)=> <RenderSuggestions key={index} dataSuggestions={suggestion} />)}
 
           </div>
 

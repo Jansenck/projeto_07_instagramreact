@@ -1,7 +1,22 @@
+import {useState} from "react";
+
 function RenderPosts(props){
 
+    const [like, setLike] = useState(true);
+    const [likeData, setLikeData] = useState({heart: "heart-outline", color: "black"});  
+
+    function postLike(){
+
+        setLike(!like);
+
+        like?
+            setLikeData({...likeData, heart: "heart", color: "red"})
+        :
+            setLikeData({...likeData, heart: "heart-outline", color: "black"})
+    }
+
     return(
-        <div className={"post"} key={props.index}>
+        <div className={"post"} >
             <div className={"topo"}>
                 <div className={"usuario"}>
                     <img src={props.dataPost.userImage} alt={props.dataPost.userImage}/>
@@ -13,13 +28,13 @@ function RenderPosts(props){
             </div>
 
             <div className={"conteudo"}>
-                <img src={props.dataPost.postImage} alt={props.dataPost.postImage}/>
+                <img src={props.dataPost.postImage} alt={props.dataPost.postImage} onClick={postLike}/>
             </div>
 
             <div className={"fundo"}>
                 <div className={"acoes"}>
                     <div>
-                        <ion-icon name={"heart-outline"}></ion-icon>
+                        <ion-icon name={`${likeData.heart}`} style={{color:`${likeData.color}`}} onClick={postLike}></ion-icon>
                         <ion-icon name={"chatbubble-outline"}></ion-icon>
                         <ion-icon name={"paper-plane-outline"}></ion-icon>
                     </div>
@@ -39,7 +54,7 @@ function RenderPosts(props){
     );
 }
 
-export default function Posts(){
+export default function Posts(){  
 
     const posts = [
         {
@@ -63,7 +78,7 @@ export default function Posts(){
 
     return(
         <div className={"posts"}>
-            {posts.map((post, index) => <RenderPosts dataPost={post} index={index}/>)}
+            {posts.map((post, index) => <RenderPosts key={index} dataPost={post} index={index}/>)}
         </div>
     );
 }
